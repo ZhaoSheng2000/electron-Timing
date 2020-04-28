@@ -3,7 +3,6 @@ import {Button, Divider, Steps, Input, Tag} from "antd"
 const {Step} = Steps;
 
 export default class Today extends React.Component {
-
     state = {
         timeline: [
             {
