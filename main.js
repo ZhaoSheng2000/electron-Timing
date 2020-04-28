@@ -19,7 +19,6 @@ app.whenReady().then(() => {
     // Menu.setApplicationMenu(menu)
 });
 
-
 app.on('ready', () => {
     //定义菜单
     const contextMenu = Menu.buildFromTemplate([
