@@ -43,6 +43,25 @@ app.on('ready', () => {
             }
         },
         {
+            label: '更多...',
+            accelerator: (() => 'R')(),
+            click: () => {
+                let moreWindow = new BrowserWindow({
+                    width: 800,
+                    height: 600,
+                    minWidth:280,
+                    // frame: false,
+                    // alwaysOnTop: true,
+                    webPreferences: {
+                        webSecurity: false,//禁用窗口同源策略：
+                        nodeIntegration: true,
+                    }
+                });
+                // Window.loadFile('index.html')
+                moreWindow.loadURL('http://localhost:3000/more');
+            }
+        },
+        {
             label: '退出',
             accelerator: (() =>'CmdOrCtrl+Q')(),
             click: () => {

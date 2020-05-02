@@ -1,8 +1,7 @@
 import React from 'react';
 import {Link, Switch, Route} from 'react-router-dom';
-import {Button, Layout, Menu} from 'antd';
+import { Layout, Menu} from 'antd';
 import {
-    CarryOutOutlined,
     FlagOutlined,
     BarChartOutlined,
     ClockCircleOutlined
@@ -10,7 +9,6 @@ import {
 import './index.less'
 
 import History from '../history/History'
-import Today from "../today/Today"
 
 const electron = window.require('electron');
 
@@ -40,15 +38,9 @@ export default class Index extends React.Component {
                         collapsedWidth={80}
                         collapsed={this.state.collapsed} onCollapse={this.onCollapse}
                     >
-                        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-                            <Menu.Item key="1">
-                                <Link to={'/today'}>
-                                    <CarryOutOutlined />
-                                    <span>今天</span>
-                                </Link>
-                            </Menu.Item>
+                        <Menu theme="dark" defaultSelectedKeys={['2']} mode="inline">
                             <Menu.Item key="2">
-                                <Link to={'/history'}>
+                                <Link to={'/more/history'}>
                                     <ClockCircleOutlined/>
                                     <span>历史</span>
                                 </Link>
@@ -66,9 +58,8 @@ export default class Index extends React.Component {
                     <Layout className="site-layout">
                         <Content style={{margin: '16px 16px'}}>
                             <Switch>
-                                <Route path={'/today'} component={Today}/>
-                                <Route path={'/history'} component={History}/>
-                                <Route component={Today}/>
+                                <Route path={'/more/history'} component={History}/>
+                                <Route component={History}/>
                             </Switch>
                         </Content>
                         <Footer
