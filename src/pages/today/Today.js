@@ -1,5 +1,6 @@
 import React from 'react'
 import {Button, Divider, Steps, Input, Tag, message, Statistic, Row, Col} from "antd"
+
 import formateTime from '../../utils/formateTime'
 
 const {Step} = Steps;
@@ -69,40 +70,55 @@ export default class Today extends React.Component {
         const {timeline, add, title, label} = this.state
         const time = formateTime(this.state.time)
         return (
-            <div>
+            <div style={{paddingTop: 10}}>
                 <Row>
                     <Col span={22} offset={1}>
-                        <Row gutter={16}>
-                            <Col span={12}>
-                                {timeline!== undefined?
-                                    <Statistic title={timeline[timeline.length-1].title} value={time}/>
-                                    :null
+                        {timeline !== undefined ?
+                            (<span><span style={{fontSize: 28}}>{timeline[timeline.length - 1].title}</span>&nbsp;&nbsp;
+                                {timeline[timeline.length - 1].label !== '' ?
+                                    <Tag color="cyan">{timeline[timeline.length - 1].label}</Tag>
+                                    : null
                                 }
-                            </Col>
-                            <Col span={12}>
-                                <Button size={"small"} type={"primary"} onClick={this.createTimeLine}>NEW</Button>
-                            </Col>
-                        </Row>
+                                <br/>{time}</span>)
+                            : null
+                        }
+                        {timeline === undefined ?
+                            <Button size={"small"} type={"primary"} onClick={this.createTimeLine}>NEW</Button>
+                            : null
+                        }
                         <Divider/>
-                        <Steps progressDot  direction="vertical">
+                        <Steps progressDot direction="vertical">
                             {timeline !== undefined ? timeline.map((name, index) => {
                                 return (
-                                    <Step key={index} status={"finish"} title={name.title} description={<span><Tag
-                                        color="cyan">{name.label}</Tag><br/>{name.fromDate}</span>}/>
+                                    <Step
+                                        key={index}
+                                        status={"finish"}
+                                        title={name.title}
+                                        description={<span>
+                                            {name.label !== '' ?
+                                               <span><Tag color="cyan">{name.label}</Tag> <br/></span>
+                                                : null
+                                            }
+                                           {name.fromDate}</span>}/>
                                 )
                             }) : null
                             }
 
                             {add ?
                                 <Step
-                                    title={<Input size={"small"} value={title} placeholder="做点什么呢 ？" onChange={this.titleChange}
+                                    title={<Input size={"small"} value={title} placeholder="做点什么呢 ？"
+                                                  onChange={this.titleChange}
                                                   onPressEnter={this.onPress}/>}
-                                    description={<Input style={{width: 125}} size={"small"} value={label} placeholder={'标签（可选）'}
+                                    description={<Input style={{width: 125}} size={"small"} value={label}
+                                                        placeholder={'标签（可选）'}
                                                         onChange={this.labelChange} onPressEnter={this.onPress}/>}/>
                                 : null
                             }
                         </Steps>
-                        <Button>结束</Button>
+                        {timeline !== undefined ?
+                            <Button>结束</Button>
+                            : null
+                        }
 
                     </Col>
                 </Row>
