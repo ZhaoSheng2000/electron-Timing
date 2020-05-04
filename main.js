@@ -24,7 +24,7 @@ app.on('ready', () => {
     const contextMenu = Menu.buildFromTemplate([
         {
             label: '显示主界面',
-            accelerator: (() =>'CmdOrCtrl+W' )(),
+            accelerator: (() => 'CmdOrCtrl+W')(),
             click: () => {
                 mainWindow.show()
             }
@@ -34,10 +34,10 @@ app.on('ready', () => {
             type: 'checkbox',
             accelerator: (() => 'E')(),
             click: () => {
-                if (mainWindow.isAlwaysOnTop()){
+                if (mainWindow.isAlwaysOnTop()) {
                     mainWindow.setAlwaysOnTop(false)
 
-                }else {
+                } else {
                     mainWindow.setAlwaysOnTop(true)
                 }
             }
@@ -46,27 +46,17 @@ app.on('ready', () => {
             label: '更多...',
             accelerator: (() => 'R')(),
             click: () => {
-                let moreWindow = new BrowserWindow({
-                    width: 800,
-                    height: 600,
-                    minWidth:280,
-                    // frame: false,
-                    // alwaysOnTop: true,
-                    webPreferences: {
-                        webSecurity: false,//禁用窗口同源策略：
-                        nodeIntegration: true,
-                    }
-                });
-                // Window.loadFile('index.html')
-                moreWindow.loadURL('http://localhost:3000/more');
+                moreWindow.show()
             }
         },
         {
             label: '退出',
-            accelerator: (() =>'CmdOrCtrl+Q')(),
+            accelerator: (() => 'CmdOrCtrl+Q')(),
             click: () => {
                 mainWindow.destroy()
                 mainWindow = null
+                moreWindow.destroy()
+                moreWindow = null
                 app.quit()
             }
         }
@@ -81,7 +71,7 @@ app.on('ready', () => {
     let mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
-        minWidth:280,
+        minWidth: 280,
         // frame: false,
         // alwaysOnTop: true,
         webPreferences: {
@@ -98,18 +88,41 @@ app.on('ready', () => {
         mainWindow.hide();
         e.preventDefault();
     })
+    //创建'更多'窗口
+    let moreWindow = new BrowserWindow({
+        width: 800,
+        height: 600,
+        minWidth: 280,
+        show: false,
+        // frame: false,
+        // alwaysOnTop: true,
+        webPreferences: {
+            webSecurity: false,//禁用窗口同源策略：
+            nodeIntegration: true,
+        }
+    });
+    // Window.loadFile('index.html')
+    moreWindow.loadURL('http://localhost:3000/more');
+    //隐藏'more'窗口
+    moreWindow.on('close', e => {
+        moreWindow.hide();
+        e.preventDefault();
+    })
+
 
     //监听快捷键
     globalShortcut.register('CmdOrCtrl+W', () => {
-        if (mainWindow.isVisible()){
+        if (mainWindow.isVisible()) {
             mainWindow.hide()
-        }else
-        mainWindow.show()
+        } else
+            mainWindow.show()
     })
 
     globalShortcut.register('CmdOrCtrl+Q', () => {
         mainWindow.destroy()
+        moreWindow.destroy()
         mainWindow = null
+        moreWindow = null
         app.quit()
     })
     globalShortcut.register('CmdOrCtrl+R', () => {

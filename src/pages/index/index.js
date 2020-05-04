@@ -20,7 +20,7 @@ const {clipboard, desktopCapturer, screen, shell, remote} = electron;
 export default class Index extends React.Component {
 
     state = {
-        collapsed: true,
+        collapsed: false,
     };
 
     onCollapse = collapsed => {
@@ -62,8 +62,7 @@ export default class Index extends React.Component {
                                 <Route component={History}/>
                             </Switch>
                         </Content>
-                        <Footer
-                            style={{textAlign: "center", fontSize: 10, paddingBottom: 10}}>如鱼饮水，冷暖自知。</Footer>
+                        <Footer style={{textAlign: "center", fontSize: 10, paddingBottom: 10}}>如鱼饮水，冷暖自知。</Footer>
                     </Layout>
                 </Layout>
             </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Divider, Steps, Input, Tag, message, Statistic, Row, Col} from "antd"
+import {Button, Divider, Steps, Input, Tag, message, Row, Col} from "antd"
 
 import formateTime from '../../utils/formateTime'
 
@@ -12,7 +12,7 @@ export default class Today extends React.Component {
         add: false,
         title: '',
         label: '',
-        date: new Date().toLocaleTimeString(),
+        date: '',
         // timeline: [
         //     {
         //         title: '',
@@ -41,7 +41,16 @@ export default class Today extends React.Component {
         const {title, label} = this.state;
         if (this.timer !== undefined) {
             clearInterval(this.timer);
-            this.setState({time: ''})
+            this.setState({
+                time: '',
+            })
+            let timeline = this.state.timeline;
+            timeline[timeline.length - 1].toDate = new Date().toLocaleTimeString()
+            this.setState({
+                timeline: timeline
+            })
+            console.log(this.state)
+
         }
         if (title === '') {
             message.warning('您还没有告诉我您要做什么呢')
@@ -50,10 +59,11 @@ export default class Today extends React.Component {
             timeline.push({
                 title,
                 label,
-                fromDate: '2020-10-10',
+                fromDate: new Date().toLocaleTimeString(),
                 toDate: '',
             })
             this.setState({
+                date: new Date().toLocaleTimeString(),
                 timeline: timeline,
                 title: '',
                 label: '',
@@ -66,6 +76,17 @@ export default class Today extends React.Component {
         }
     }
 
+    onEndLine = () => {
+        let timeline = this.state.timeline;
+        timeline[timeline.length - 1].toDate = new Date().toLocaleTimeString()
+        this.setState({
+            add: false,
+            timeline: timeline,
+    })
+        clearInterval(this.timer);
+        console.log(this.state)
+    }
+
     render() {
         const {timeline, add, title, label} = this.state
         const time = formateTime(this.state.time)
@@ -74,55 +95,76 @@ export default class Today extends React.Component {
                 <Row>
                     <Col span={22} offset={1}>
                         {timeline !== undefined ?
-                            (<span><span style={{fontSize: 28}}>{timeline[timeline.length - 1].title}</span>&nbsp;&nbsp;
-                                {timeline[timeline.length - 1].label !== '' ?
-                                    <Tag color="cyan">{timeline[timeline.length - 1].label}</Tag>
-                                    : null
-                                }
-                                <br/>{time}</span>)
+                            (
+                                <span>
+                                    <span style={{fontSize: 24}}>
+                                        {timeline[timeline.length - 1].title}
+                                    </span>&nbsp;&nbsp;
+                                    {timeline[timeline.length - 1].label !== '' ?
+                                        <Tag color="cyan">{timeline[timeline.length - 1].label}</Tag>
+                                        : null
+                                    }
+                                    <br/>{time}
+                                </span>
+                            )
                             : null
                         }
+
                         {timeline === undefined ?
-                            <Button size={"small"} type={"primary"} onClick={this.createTimeLine}>NEW</Button>
+                            <div style={{textAlign: "center"}}>
+                                <Button size={"small"} type={"primary"} onClick={this.createTimeLine}>NEW</Button>
+                            </div>
                             : null
                         }
                         <Divider/>
                         <Steps progressDot direction="vertical">
-                            {timeline !== undefined ? timeline.map((name, index) => {
-                                return (
-                                    <Step
-                                        key={index}
-                                        status={"finish"}
-                                        title={name.title}
-                                        description={<span>
-                                            {name.label !== '' ?
-                                               <span><Tag color="cyan">{name.label}</Tag> <br/></span>
-                                                : null
+                            {
+                                timeline !== undefined ? timeline.map((name, index) => {
+                                    return (
+                                        <Step
+                                            key={index}
+                                            status={"finish"}
+                                            title={name.title}
+                                            description={
+                                                <span>
+                                            {
+                                                name.label !== '' ?
+                                                    <span><Tag color="cyan">{name.label}</Tag> <br/></span>
+                                                    : null
                                             }
-                                           {name.fromDate}</span>}/>
-                                )
-                            }) : null
+                                                    {name.fromDate}
+                                                    {
+                                                        name.toDate !== '' ?
+                                                            <span> <br/> {name.toDate} </span>
+                                                            : null
+                                                    }
+                                            </span>
+                                            }
+                                        />
+                                    )
+                                }) : null
                             }
 
-                            {add ?
-                                <Step
-                                    title={<Input size={"small"} value={title} placeholder="做点什么呢 ？"
-                                                  onChange={this.titleChange}
-                                                  onPressEnter={this.onPress}/>}
-                                    description={<Input style={{width: 125}} size={"small"} value={label}
-                                                        placeholder={'标签（可选）'}
-                                                        onChange={this.labelChange} onPressEnter={this.onPress}/>}/>
-                                : null
+                            {
+                                add ?
+                                    <Step
+                                        title={<Input size={"small"} value={title} placeholder="做点什么呢 ？"
+                                                      onChange={this.titleChange}
+                                                      onPressEnter={this.onPress}/>}
+                                        description={<Input style={{width: 125}} size={"small"} value={label}
+                                                            placeholder={'标签（可选）'}
+                                                            onChange={this.labelChange} onPressEnter={this.onPress}/>}/>
+                                    : null
                             }
                         </Steps>
-                        {timeline !== undefined ?
-                            <Button>结束</Button>
-                            : null
+                        {
+                            timeline !== undefined ?
+                                <Button onClick={this.onEndLine}>ENDLINE</Button>
+                                : null
                         }
 
                     </Col>
                 </Row>
-
             </div>
         )
     }
