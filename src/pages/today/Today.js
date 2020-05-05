@@ -2,6 +2,7 @@ import React from 'react'
 import {Button, Divider, Steps, Input, Tag, message, Row, Col} from "antd"
 
 import formateTime from '../../utils/formateTime'
+import {reqTimeLine} from "../../api"
 
 const {Step} = Steps;
 
@@ -81,10 +82,15 @@ export default class Today extends React.Component {
         timeline[timeline.length - 1].toDate = new Date().toLocaleTimeString()
         this.setState({
             add: false,
+            endbtn: false,
             timeline: timeline,
     })
         clearInterval(this.timer);
         console.log(this.state)
+        reqTimeLine({userId:'111',timeline:this.state.timeline}).then((res)=>{
+            console.log(res.data)
+        })
+        // window.location.reload()
     }
 
     render() {
@@ -158,8 +164,8 @@ export default class Today extends React.Component {
                             }
                         </Steps>
                         {
-                            timeline !== undefined ?
-                                <Button onClick={this.onEndLine}>ENDLINE</Button>
+                            timeline !== undefined  ?
+                                <Button onClick={this.onEndLine} >ENDLINE</Button>
                                 : null
                         }
 
