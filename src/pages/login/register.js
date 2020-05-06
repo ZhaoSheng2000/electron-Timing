@@ -1,24 +1,27 @@
 import React from 'react'
-import {Form, Input, Button, Card} from 'antd';
-import {BellOutlined,UserOutlined, LockOutlined} from '@ant-design/icons';
-import Cookies from 'js-cookie'
-import {reqLogin} from "../../api";
+import {Form, Input, Button, Card, message} from 'antd';
+import {BellOutlined, UserOutlined, LockOutlined} from '@ant-design/icons';
+import {reqRegister} from "../../api";
 
 
 export default class Register extends React.Component {
-    state = {
-
-    };
+    state = {};
     onFinish = (e) => {
         console.log(e);
-        this.props.userLogin(e);
-        reqLogin({
-            username: e.username,
+        reqRegister({
+            email: e.email,
+            name: e.username,
             password: e.password
-        }).then(r => {
-            const userId = r.data.data[0].id;
-            Cookies.set("userId", userId, {expires: 1});
-        });
+        }).then(res => {
+            console.log(res.data)
+            const {success} = res.data
+            if (success === 0){
+                message.success('注册成功，正在为您跳转至登陆界面')
+                this.props.history.push('/login')
+            }else {
+                message.error('该邮箱已被占用,换一个试试吧')
+            }
+        })
     };
 
 
