@@ -84,13 +84,18 @@ export default class Today extends React.Component {
             add: false,
             endbtn: false,
             timeline: timeline,
-    })
+        })
         clearInterval(this.timer);
         console.log(this.state)
-        reqTimeLine({userId:'111',timeline:this.state.timeline}).then((res)=>{
-            console.log(res.data)
+        reqTimeLine({userId: '111', timeline: this.state.timeline}).then((res) => {
+            const msg = res.data.msg
+            if (msg === 'success') {
+                message.success('保存成功！请在"更多"中查看')
+                setTimeout(()=>window.location.reload(),2000)
+            }else {
+                message.error("保存失败！请稍后再试")
+            }
         })
-        // window.location.reload()
     }
 
     render() {
@@ -164,8 +169,8 @@ export default class Today extends React.Component {
                             }
                         </Steps>
                         {
-                            timeline !== undefined  ?
-                                <Button onClick={this.onEndLine} >ENDLINE</Button>
+                            timeline !== undefined ?
+                                <Button onClick={this.onEndLine}>ENDLINE</Button>
                                 : null
                         }
 

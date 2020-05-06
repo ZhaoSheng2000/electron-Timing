@@ -102,7 +102,7 @@ app.on('ready', () => {
         }
     });
     // Window.loadFile('index.html')
-    moreWindow.loadURL('http://localhost:3000/more');
+    moreWindow.loadURL('http://localhost:3000/login');
     //隐藏'more'窗口
     moreWindow.on('close', e => {
         moreWindow.hide();

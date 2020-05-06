@@ -1,11 +1,11 @@
 import React from 'react'
 import {Form, Input, Button, Card} from 'antd';
-import {UserOutlined, LockOutlined} from '@ant-design/icons';
+import {BellOutlined,UserOutlined, LockOutlined} from '@ant-design/icons';
 import Cookies from 'js-cookie'
 import {reqLogin} from "../../api";
 
 
-export default class Login extends React.Component {
+export default class Register extends React.Component {
     state = {
 
     };
@@ -34,7 +34,7 @@ export default class Login extends React.Component {
             }}
             >
                 <Card
-                    title='邮箱登陆'
+                    title='注册账号'
                     style={{
                         width: 330,
                     }}>
@@ -47,8 +47,17 @@ export default class Login extends React.Component {
                         >
                             <Input
                                 type="email"
-                                prefix={<UserOutlined/>}
+                                prefix={<BellOutlined/>}
                                 placeholder="email"
+                            />
+                        </Form.Item>
+                        <Form.Item
+                            name="username"
+                            rules={[{required: true, message: '请输入您的昵称！'}]}
+                        >
+                            <Input
+                                prefix={<UserOutlined/>}
+                                placeholder="username"
                             />
                         </Form.Item>
                         <Form.Item
@@ -63,9 +72,9 @@ export default class Login extends React.Component {
                         </Form.Item>
                         <Form.Item>
                             <Button type="primary" htmlType="submit" block>
-                                登 录
+                                注 册
                             </Button>
-                            没有账号？ <a href="/register">现在注册！</a>
+                            <a href="/login">返回登录</a>
                         </Form.Item>
                     </Form>
                 </Card>
