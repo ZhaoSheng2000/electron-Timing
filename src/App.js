@@ -15,7 +15,6 @@ function App() {
                 <Route path={'/login'} component={Login}/>
                 <Route path={'/register'} component={Register}/>
                 <Route  component={Today}/>
-
             </Switch>
         </BrowserRouter>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link, Switch, Route} from 'react-router-dom';
-import { Layout, Menu} from 'antd';
+import {Layout, Menu} from 'antd';
 import {
     FlagOutlined,
     BarChartOutlined,
@@ -23,10 +23,10 @@ export default class Index extends React.Component {
         collapsed: false,
     };
 
+
     onCollapse = collapsed => {
         this.setState({collapsed});
     };
-
 
     render() {
         return (

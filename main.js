@@ -46,6 +46,7 @@ app.on('ready', () => {
             label: '更多...',
             accelerator: (() => 'R')(),
             click: () => {
+                moreWindow.reload()
                 moreWindow.show()
             }
         },
@@ -69,7 +70,7 @@ app.on('ready', () => {
     })
 
     let mainWindow = new BrowserWindow({
-        width: 800,
+        width: 280,
         height: 600,
         minWidth: 280,
         // frame: false,
@@ -90,9 +91,9 @@ app.on('ready', () => {
     })
     //创建'更多'窗口
     let moreWindow = new BrowserWindow({
-        width: 800,
+        width: 650,
         height: 600,
-        minWidth: 280,
+        minWidth: 350,
         show: false,
         // frame: false,
         // alwaysOnTop: true,
@@ -102,7 +103,7 @@ app.on('ready', () => {
         }
     });
     // Window.loadFile('index.html')
-    moreWindow.loadURL('http://localhost:3000/login');
+    moreWindow.loadURL('http://localhost:3000/more');
     //隐藏'more'窗口
     moreWindow.webContents.openDevTools()
 

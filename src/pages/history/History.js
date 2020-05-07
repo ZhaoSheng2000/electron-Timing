@@ -1,28 +1,66 @@
 import React from 'react'
-import { Steps, Divider } from 'antd';
-const { Step } = Steps;
+import {Steps, Card, Row, Col, Tag} from 'antd';
+
+import {reqFindLine} from "../../api"
+import utcTobeijing from "../../utils/utcTobeijing"
+const {Step} = Steps;
 
 
 export default class History extends React.Component {
 
-    state = {};
+    state = {
+        timelines:[]
+    };
+
+    componentDidMount() {
+        const userId = localStorage.getItem('userId')
+        reqFindLine({userId}).then(res => {
+            console.log(res.data)
+            this.setState({timelines: res.data})
+        })
+    }
 
     render() {
+        const {timelines} = this.state
         return (
             <div>
-                <Steps progressDot current={1}>
-                    <Step title="Finished" description="This is a description.This is a description" />
-                    <Step title="In Progress" description="This is a description." />
-                    <Step title="Waiting" description="This is a description." />
-                </Steps>
-                <Divider />
-                <Steps progressDot current={1} direction="vertical">
-                    <Step title="Finished" description="This is a description. This is a description.This is a description.This is a description.This is a description." />
-                    <Step title="Finished" description="This is a description. This is a description." />
-                    <Step title="In Progress" description="This is a description. This is a description." />
-                    <Step title="Waiting" description="This is a description." />
-                    <Step title="Waiting" description="This is a description." />
-                </Steps>
+                <Row gutter={[16, 16]}>
+                    {
+                        timelines.reverse().map((name, index) => {
+                            return (
+                                <Col key={index}>
+                                    <Card style={{width: 240}} title={name.createTime}>
+                                        <Steps progressDot direction="vertical">
+                                            {
+                                                name.timeline.map((line, index) => {
+                                                    return (
+                                                        <Step
+                                                            key={index}
+                                                            status={"finish"}
+                                                            title={line.title}
+                                                            description={
+                                                                <span>
+                                                                    {
+                                                                    line.label !== '' ?
+                                                                        <span><Tag color="cyan">{line.label}</Tag> <br/></span>
+                                                                        : null
+                                                                    }
+                                                                    {line.fromDate}
+                                                                    {<span><br/>{line.toDate}</span>}
+                                                                </span>
+                                                            }
+                                                        />
+                                                    )
+                                                })
+                                            }
+                                        </Steps>
+                                    </Card>
+                                </Col>
+                            )
+                        })
+                    }
+
+                </Row>
             </div>
         )
     }

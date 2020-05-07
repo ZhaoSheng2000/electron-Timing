@@ -6,8 +6,8 @@ const baseUrl = 'http://localhost:5000'
 // export const reqyiyan = ()=>axios.get('https://v1.hitokoto.cn/?c=d')
 
 //登录接口
-export const reqLogin = ({username, password}) => axios.post(baseUrl + '/my/login', {
-    username,
+export const reqLogin = ({email, password}) => axios.post(baseUrl + '/api/users/login', {
+    email,
     password
 });
 //注册接口
@@ -16,8 +16,9 @@ export const reqRegister = ({email, name, password}) => axios.post(baseUrl + '/a
     name,
     password
 })
-
-export const reqTimeLine = ({userId, timeline}) => axios.post(baseUrl + '/api/timeline/newline', {
+export const reqTimeLine = ({userId, createTime,timeline}) => axios.post(baseUrl + '/api/timeline/newline', {
     userId,
+    createTime,
     timeline
 })
+export const reqFindLine = ({userId}) => axios.post(baseUrl + '/api/timeline/findline', {userId})

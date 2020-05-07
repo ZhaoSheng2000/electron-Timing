@@ -1,23 +1,28 @@
 import React from 'react'
-import {Form, Input, Button, Card} from 'antd';
+import {Form, Input, Button, Card, message} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
-import Cookies from 'js-cookie'
 import {reqLogin} from "../../api";
 
 
 export default class Login extends React.Component {
-    state = {
-
-    };
+    state = {};
     onFinish = (e) => {
-        console.log(e);
-        this.props.userLogin(e);
         reqLogin({
-            username: e.username,
+            email: e.email,
             password: e.password
         }).then(r => {
-            const userId = r.data.data[0].id;
-            Cookies.set("userId", userId, {expires: 1});
+            const {success,token,userId} = r.data
+            console.log(r.data)
+            if (success === 0) {
+                message.success('登录成功！')
+                localStorage.setItem('token',token)
+                localStorage.setItem('userId',userId)
+                this.props.history.push('/')
+            } else if (success === 1) {
+                message.warning('用户不存在！')
+            }else {
+                message.error('密码错误！')
+            }
         });
     };
 

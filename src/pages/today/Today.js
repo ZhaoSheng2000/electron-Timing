@@ -14,6 +14,7 @@ export default class Today extends React.Component {
         title: '',
         label: '',
         date: '',
+        createTime:''
         // timeline: [
         //     {
         //         title: '',
@@ -23,6 +24,12 @@ export default class Today extends React.Component {
         //     }
         // ],
     };
+    componentDidMount() {
+        let userId = localStorage.getItem("userId")
+        if (!userId){
+            this.props.history.push('/login')
+        }
+    }
 
     //  清除计时器
     componentWillUnmount() {
@@ -30,7 +37,7 @@ export default class Today extends React.Component {
     }
 
     createTimeLine = () => {
-        this.setState({add: true})
+        this.setState({add: true,createTime: new Date().toLocaleDateString()})
     }
     titleChange = ({target: {value}}) => {
         this.setState({title: value});
@@ -87,7 +94,7 @@ export default class Today extends React.Component {
         })
         clearInterval(this.timer);
         console.log(this.state)
-        reqTimeLine({userId: '111', timeline: this.state.timeline}).then((res) => {
+        reqTimeLine({userId: localStorage.getItem('userId'), createTime: this.state.createTime, timeline: this.state.timeline}).then((res) => {
             const msg = res.data.msg
             if (msg === 'success') {
                 message.success('保存成功！请在"更多"中查看')
