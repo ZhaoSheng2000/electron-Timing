@@ -10,6 +10,7 @@ import './index.less'
 
 import History from '../history/History'
 import Count from "../count/count"
+import Plan from "../plan/plan"
 
 const electron = window.require('electron');
 
@@ -47,8 +48,10 @@ export default class Index extends React.Component {
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="8">
-                                <FlagOutlined/>
-                                <span>计划</span>
+                                <Link to={'/more/plan'}>
+                                    <FlagOutlined/>
+                                    <span>计划</span>
+                                </Link>
                             </Menu.Item>
                             <Menu.Item key="4">
                                 <Link to={'/more/count'}>
@@ -63,6 +66,7 @@ export default class Index extends React.Component {
                             <Switch>
                                 <Route path={'/more/history'} component={History}/>
                                 <Route path={'/more/count'} component={Count}/>
+                                <Route path={'/more/plan'} component={Plan}/>
                                 <Route component={History}/>
                             </Switch>
                         </Content>
