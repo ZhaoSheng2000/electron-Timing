@@ -9,6 +9,7 @@ import {
 import './index.less'
 
 import History from '../history/History'
+import Count from "../count/count"
 
 const electron = window.require('electron');
 
@@ -50,8 +51,10 @@ export default class Index extends React.Component {
                                 <span>计划</span>
                             </Menu.Item>
                             <Menu.Item key="4">
-                                <BarChartOutlined/>
-                                <span>统计</span>
+                                <Link to={'/more/count'}>
+                                    <BarChartOutlined/>
+                                    <span>统计</span>
+                                </Link>
                             </Menu.Item>
                         </Menu>
                     </Sider>
@@ -59,6 +62,7 @@ export default class Index extends React.Component {
                         <Content style={{margin: '16px 16px'}}>
                             <Switch>
                                 <Route path={'/more/history'} component={History}/>
+                                <Route path={'/more/count'} component={Count}/>
                                 <Route component={History}/>
                             </Switch>
                         </Content>

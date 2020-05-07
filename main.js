@@ -91,7 +91,7 @@ app.on('ready', () => {
     })
     //创建'更多'窗口
     let moreWindow = new BrowserWindow({
-        width: 650,
+        width: 950,
         height: 600,
         minWidth: 350,
         show: false,
