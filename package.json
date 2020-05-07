@@ -13,7 +13,8 @@
     "babel-plugin-import": "^1.13.0",
     "customize-cra": "^0.9.1",
     "electron": "^8.2.3",
-    "js-cookie": "^2.2.1",
+    "electron-packager": "^14.2.1",
+    "electron-prebuilt": "^1.4.13",
     "less": "^3.11.1",
     "less-loader": "^5.0.0",
     "nodemon": "^2.0.3",
@@ -36,7 +37,8 @@
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
     "electron": "electron .",
-    "server": "yarn run nodemon --ignore ./package.json --exec electron ."
+    "server": "yarn run nodemon --ignore ./package.json --exec electron .",
+    "package": "electron-packager . Timing --platform=darwin --arch=x64.zip --out=./Outapp  --overwrite --asar"
   },
   "eslintConfig": {
     "extends": "react-app"

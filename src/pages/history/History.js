@@ -2,7 +2,6 @@ import React from 'react'
 import {Steps, Card, Row, Col, Tag} from 'antd';
 
 import {reqFindLine} from "../../api"
-import utcTobeijing from "../../utils/utcTobeijing"
 const {Step} = Steps;
 
 

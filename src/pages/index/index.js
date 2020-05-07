@@ -12,11 +12,11 @@ import History from '../history/History'
 import Count from "../count/count"
 import Plan from "../plan/plan"
 
-const electron = window.require('electron');
+// const electron = window.require('electron');
 
 
 const {Footer, Content, Sider} = Layout;
-const {clipboard, desktopCapturer, screen, shell, remote} = electron;
+// const {clipboard, desktopCapturer, screen, shell, remote} = electron;
 
 
 export default class Index extends React.Component {
@@ -42,19 +42,19 @@ export default class Index extends React.Component {
                     >
                         <Menu theme="dark" defaultSelectedKeys={['2']} mode="inline">
                             <Menu.Item key="2">
-                                <Link to={'/more/history'}>
+                                <Link to={'/#/more/history'}>
                                     <ClockCircleOutlined/>
                                     <span>历史</span>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="8">
-                                <Link to={'/more/plan'}>
+                                <Link to={'/#/more/plan'}>
                                     <FlagOutlined/>
                                     <span>计划</span>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="4">
-                                <Link to={'/more/count'}>
+                                <Link to={'/#/more/count'}>
                                     <BarChartOutlined/>
                                     <span>统计</span>
                                 </Link>
