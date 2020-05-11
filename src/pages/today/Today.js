@@ -93,7 +93,6 @@ export default class Today extends React.Component {
             timeline: timeline,
         })
         clearInterval(this.timer);
-        console.log(this.state)
         reqTimeLine({userId: localStorage.getItem('userId'), createTime: this.state.createTime, timeline: this.state.timeline}).then((res) => {
             const msg = res.data.msg
             if (msg === 'success') {

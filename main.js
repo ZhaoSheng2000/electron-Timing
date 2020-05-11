@@ -80,8 +80,8 @@ app.on('ready', () => {
             nodeIntegration: true,
         }
     });
-    // mainWindow.loadURL('http://localhost:3000');
-    mainWindow.loadURL('file:///Users/mac/WebstormProjects/electron-timing/build/index.html#/')
+    mainWindow.loadURL('http://localhost:3000');
+    // mainWindow.loadURL('file:///Users/mac/WebstormProjects/electron-timing/build/index.html#/')
     // Open the DevTools.
     mainWindow.webContents.openDevTools()
     //点击X时隐藏窗口
@@ -91,6 +91,7 @@ app.on('ready', () => {
     })
     //创建'更多'窗口
     let moreWindow = new BrowserWindow({
+
         width: 950,
         height: 600,
         minWidth: 350,
@@ -102,8 +103,8 @@ app.on('ready', () => {
             nodeIntegration: true,
         }
     });
-    // moreWindow.loadURL('http://localhost:3000/#/more');
-    moreWindow.loadURL('file:///Users/mac/WebstormProjects/electron-timing/build/index.html#/more')
+    moreWindow.loadURL('http://localhost:3000/#/more');
+    // moreWindow.loadURL('file:///Users/mac/WebstormProjects/electron-timing/build/index.html#/more')
     //隐藏'more'窗口
     moreWindow.webContents.openDevTools()
 
