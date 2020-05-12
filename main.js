@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, Tray, Menu, globalShortcut} = require('electron');
+const {app, BrowserWindow, Tray, Menu, globalShortcut,shell} = require('electron');
 const path = require('path');
 
 Menu.setApplicationMenu(null) //取消菜单栏
@@ -32,7 +32,6 @@ app.on('ready', () => {
         {
             label: '置顶窗口',
             type: 'checkbox',
-            accelerator: (() => 'E')(),
             click: () => {
                 if (mainWindow.isAlwaysOnTop()) {
                     mainWindow.setAlwaysOnTop(false)
@@ -44,10 +43,15 @@ app.on('ready', () => {
         },
         {
             label: '更多...',
-            accelerator: (() => 'R')(),
             click: () => {
                 moreWindow.reload()
                 moreWindow.show()
+            }
+        },
+        {
+            label: '关于作者',
+            click: () => {
+                shell.openExternal('https://zhaosheng2000.github.io/')
             }
         },
         {
