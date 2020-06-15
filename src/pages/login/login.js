@@ -70,7 +70,7 @@ export default class Login extends React.Component {
                             <Button type="primary" htmlType="submit" block>
                                 登 录
                             </Button>
-                            没有账号？ <a href="/register">现在注册！</a>
+                            没有账号？ <a href="/#/register">现在注册！</a>
                         </Form.Item>
                     </Form>
                 </Card>

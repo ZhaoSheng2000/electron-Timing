@@ -44,7 +44,6 @@ app.on('ready', () => {
         {
             label: '更多...',
             click: () => {
-                moreWindow.reload()
                 moreWindow.show()
             }
         },
@@ -74,7 +73,7 @@ app.on('ready', () => {
     })
 
     let mainWindow = new BrowserWindow({
-        width: 280,
+        width: 800,
         height: 600,
         minWidth: 280,
         // frame: false,
@@ -84,6 +83,7 @@ app.on('ready', () => {
             nodeIntegration: true,
         }
     });
+
     mainWindow.loadURL('http://localhost:3000');
     // mainWindow.loadURL('file:///Users/mac/WebstormProjects/electron-timing/build/index.html#/')
     // Open the DevTools.
@@ -95,7 +95,6 @@ app.on('ready', () => {
     })
     //创建'更多'窗口
     let moreWindow = new BrowserWindow({
-
         width: 950,
         height: 600,
         minWidth: 350,

@@ -4,20 +4,23 @@ import {Layout, Menu} from 'antd';
 import {
     FlagOutlined,
     BarChartOutlined,
-    ClockCircleOutlined
+    ClockCircleOutlined,
+    PlusOutlined,
+    UnorderedListOutlined
 } from '@ant-design/icons';
 import './index.less'
 
 import History from '../history/History'
 import Count from "../count/count"
 import Plan from "../plan/plan"
+import AddPlan from "../addplan/addPlan"
 
 // const electron = window.require('electron');
 
 
 const {Footer, Content, Sider} = Layout;
 // const {clipboard, desktopCapturer, screen, shell, remote} = electron;
-
+const {SubMenu} = Menu
 
 export default class Index extends React.Component {
 
@@ -36,7 +39,7 @@ export default class Index extends React.Component {
                 <Layout style={{minHeight: '100vh'}}>
                     <Sider
                         collapsible
-                        width={100}
+                        width={120}
                         collapsedWidth={80}
                         collapsed={this.state.collapsed} onCollapse={this.onCollapse}
                     >
@@ -47,12 +50,21 @@ export default class Index extends React.Component {
                                     <span>历史</span>
                                 </Link>
                             </Menu.Item>
-                            <Menu.Item key="8">
-                                <Link to={'/more/plan'}>
-                                    <FlagOutlined/>
-                                    <span>计划</span>
-                                </Link>
-                            </Menu.Item>
+                            <SubMenu key={'sub'} icon={<FlagOutlined/>} title={"计划"}>
+                                <Menu.Item key="8">
+                                    <Link to={'/more/plan'}>
+                                        <UnorderedListOutlined />
+                                        <span>列表</span>
+                                    </Link>
+                                </Menu.Item>
+                                <Menu.Item key="9">
+                                    <Link to={'/more/addplan'}>
+                                        <PlusOutlined/>
+                                        <span>添加</span>
+                                    </Link>
+                                </Menu.Item>
+                            </SubMenu>
+
                             <Menu.Item key="4">
                                 <Link to={'/more/count'}>
                                     <BarChartOutlined/>
@@ -67,6 +79,7 @@ export default class Index extends React.Component {
                                 <Route path={'/more/history'} component={History}/>
                                 <Route path={'/more/count'} component={Count}/>
                                 <Route path={'/more/plan'} component={Plan}/>
+                                <Route path={'/more/addplan'} component={AddPlan}/>
                                 <Route component={History}/>
                             </Switch>
                         </Content>

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 
-const baseUrl = 'http://localhost:5000'
+const baseUrl = 'http://47.103.219.149:5000'
 //一言接口
 // export const reqyiyan = ()=>axios.get('https://v1.hitokoto.cn/?c=d')
 
@@ -22,3 +22,9 @@ export const reqTimeLine = ({userId, createTime,timeline}) => axios.post(baseUrl
     timeline
 })
 export const reqFindLine = ({userId}) => axios.post(baseUrl + '/api/timeline/findline', {userId})
+//添加计划
+export const reqAddPlan = ({userId,plans}) =>axios.post(baseUrl+'/api/timeline/addplan',{userId,plans})
+//getplan
+export const reqGetPlan = ({userId}) =>axios.post(baseUrl+"/api/timeline/getplan",{userId})
+//delplan
+export const reqDelPlan = ({id}) =>axios.post(baseUrl+"/api/timeline/delplan",{id})
