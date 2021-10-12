@@ -12,7 +12,7 @@
     "axios": "^0.19.2",
     "babel-plugin-import": "^1.13.0",
     "customize-cra": "^0.9.1",
-    "electron": "^8.2.3",
+    "electron": "^11.5.0",
     "less": "^3.11.1",
     "less-loader": "^5.0.0",
     "moment": "^2.26.0",
@@ -25,7 +25,7 @@
     "react-scripts": "3.4.1"
   },
   "devDependencies": {
-    "electron": "^8.2.3",
+    "electron": "^11.5.0",
     "electron-builder": "^22.6.0"
   },
   "main": "main.js",
